@@ -76,10 +76,34 @@ function closeNav() {
    
 </body>
 
+<style>
+    body {
+      background-color: white;
+      color: black;
+    }
+    
+    .dark-mode {
+      background-color: black;
+      color: white;
+    }
+</style>
+<body>    
+    <button onclick="myFunction()">Toggle dark mode</button>
+    <script>
+    function myFunction() {
+       var element = document.body;
+       element.classList.toggle("dark-mode");
+    }
+</script>
+    
+</body>
+
 <body>
+    <!--
     <div>
         <body style="background-color: rgba(143, 148, 148, 0.911);"></body>
     </div>
+    -->
     <div id="root">
         <div class="page-wrapper document-page">
             <header>
