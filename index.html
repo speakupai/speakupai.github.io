@@ -1,80 +1,17 @@
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
+  <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<style>
-body {
-  font-family: "Lato", sans-serif;
-}
-
-.sidenav {
-  height: 100%;
-  width: 0;
-  position: fixed;
-  z-index: 1;
-  top: 0;
-  left: 0;
-  background-color: #111;
-  overflow-x: hidden;
-  transition: 0.5s;
-  padding-top: 60px;
-}
-
-.sidenav a {
-  padding: 8px 8px 8px 32px;
-  text-decoration: none;
-  font-size: 25px;
-  color: #818181;
-  display: block;
-  transition: 0.3s;
-}
-
-.sidenav a:hover {
-  color: #f1f1f1;
-}
-
-.sidenav .closebtn {
-  position: absolute;
-  top: 0;
-  right: 25px;
-  font-size: 36px;
-  margin-left: 50px;
-}
-
-@media screen and (max-height: 450px) {
-  .sidenav {padding-top: 15px;}
-  .sidenav a {font-size: 18px;}
-}
-</style>
-</head>
-<body>
-
-<div id="mySidenav" class="sidenav">
-  <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
-  <a href="#">Problem Definition</a>
-  <a href="#">Environment</a>
-  <a href="#">HiFiGAN</a>
-  <a href="#">Metrics</a>
-  <a href="#">Summary</a>
-  <a href="#">References<a/>
-</div>
-
-<span style="font-size:30px;cursor:pointer" onclick="openNav()">&#9776; Jump to Section</span>
-
-<script>
-function openNav() {
-  document.getElementById("mySidenav").style.width = "250px";
-}
-
-function closeNav() {
-  document.getElementById("mySidenav").style.width = "0";
-}
-</script>
-   
-</body>
+    <title>SpeakUp AI</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script src="js/projects.js"></script>
+    <script src="js/orgs.js"></script>
+    <script src="js/repos.js"></script>
+    <script src="js/loaders.js"></script>
+    <script src="js/data/load_repos.js"></script>
+    <script src="js/data/load_members.js"></script>
+    <script src="js/opensource-site.js"></script>
+  </head>
 
 <style>
     body {
@@ -86,32 +23,87 @@ function closeNav() {
       background-color: white;
       color: black;
     }
+    * {
+      box-sizing: border-box;
+    }
+
+  /* Style the header */
+    header {
+      padding: 30px;
+      text-align: center;
+      font-size: 18px;
+    }
+
+/* Create two columns/boxes that floats next to each other */
+    nav {
+      float: left;
+      width: 20%;
+      padding: 10px;
+    }
+
+/* Style the list inside the menu */
+nav ul {
+  list-style-type: circle;
+  text-align: left;
+  padding: 0;
+}
+
+article {
+  float: left;
+  padding: 20px;
+  text-align: left;
+  width: 80%;
+}
+
+/* Responsive layout - makes the two columns/boxes stack on top of each other instead of next to each other, on small screens */
+@media (max-width: 600px) {
+  nav, article {
+    width: 100%;
+    height: auto;
+  }
+}
 </style>
 <body>    
-    <button onclick="myFunction()">Toggle dark mode</button>
-    <script>
-    function myFunction() {
-       var element = document.body;
-       element.classList.toggle("dark-mode");
-    }
-</script>
-    
+   
 </body>
 
 <body>
-    <!--
-    <div>
-        <body style="background-color: rgba(143, 148, 148, 0.911);"></body>
-    </div>
-    -->
+  <button onclick="myFunction()">Toggle dark mode</button>
+  <script>
+    function myFunction() {
+     var element = document.body;
+     element.classList.toggle("dark-mode");
+    }
+  </script>
+
+    <div class="section" id="nav"><div class="widget HTML" data-version="1" id="HTML1">
+      <header class="header">
+        <div class="nav-row">
+          <div class="nav-items">
+            <tab>
+              <a class="header__nav-item all" dir="ltr" href="https://www.linkedin.com/in/ranataimurahmad/">Rana Taimur Ahmad</a>
+            </tab>
+            <tab>
+              <a class="header__nav-item" dir="ltr" href="https://www.linkedin.com/in/matthew-holmes-linder/">Matthew Linder</a>
+            </tab>
+            <tab>
+              <a class="header__nav-item" dir="ltr" href="">Wilson Ye</a>
+            </tab>
+          </div>
+      
     <div id="root">
         <div class="page-wrapper document-page">
             <header>
                 <h1 style="text-align:center">SpeakUp AI</h1>
                 <h3 style="text-align:center">Democratizing Audio</h3>
             </header>
-            <h4>Repositories Links</h4>
+          
+        <div class="top-shelf top-shelf-grey">
+          <div class="content-container">
+            <nav>
+              <h4>Repositories Links</h4>
                 <section class="document-toc">
+                          <ul class='bullet-list-round'>
                             <li><a href="https://github.com/speakupai/hifi-gan-denoising">HiFiGAN</a></li>
                             <li><a href="https://arxiv.org/abs/2006.05694">HiFiGAN Paper</a></li>
                             <li><a href="https://github.com/speakupai/audio_super_res_tf2">Audi-Super-Res Tensorflow 2</a></li>
@@ -119,43 +111,49 @@ function closeNav() {
                             <li><a href="https://github.com/speakupai/sound_metrics">Audio Metrics</a></li>
                         </ul>
                 </section>
+            </nav>
+          </div>
+        </div>
+          <article>
             <h3>Project Description</h3>
-                <div>
-                    <h4>Problem Definition</h4>
-                    <p>
-                        Add description here
-                    </p>
-                </div>
-                <div>
-                    <h4>Environment</h4>
-                    <p>
-                        Add description here
-                    </p>
-                </div>
-                <div>
-                    <h4>HiFiGAN</h4>
-                    <p>
-                        Add description here
-                    </p>
-                </div>
-                <div>
-                    <h4>Metrics</h4>
-                    <p>
-                        Add description here
-                    </p>
-                </div>
-                <div>
-                    <h4>Summary</h4>
-                    <p>
-                        Add description here
-                    </p>
-                </div>
-                <div>
-                    <h4>References</h4>
-                    <p>
-                        Add description here
-                    </p>
-                </div>
+            <div>
+                <h4>Problem Definition</h4>
+                <p>
+                    Add description here
+                </p>
+            </div>
+            <div>
+                <h4>Environment</h4>
+                <p>
+                    Add description here
+                </p>
+            </div>
+            <div>
+                <h4>HiFiGAN</h4>
+                <p>
+                    Add description here
+                </p>
+            </div>
+            <div>
+                <h4>Metrics</h4>
+                <p>
+                    Add description here
+                </p>
+            </div>
+            <div>
+                <h4>Summary</h4>
+                <p>
+                    Add description here
+                </p>
+            </div>
+            <div>
+                <h4>References</h4>
+                <p>
+                    Add description here
+                </p>
+            </div>
+          </article>
+            
         </div>
     </div>
 </body>
