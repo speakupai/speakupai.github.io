@@ -15,7 +15,7 @@ sitemap:
 
 # The Team
 
-|Matt Linder&nbsp;&nbsp;&nbsp;|[![Linkedin](https://i.stack.imgur.com/gVE0j.png)](https://www.linkedin.com/in/matthew-holmes-linder/)|&nbsp;&nbsp;|[![GitHub](https://i.stack.imgur.com/tskMh.png)](https://github.com/mholmeslinder)|
+|Matt Linder&nbsp;&nbsp;&nbsp;|[![Linkedin](https://i.stack.imgur.com/gVE0j.png)](https://www.linkedin.com/in/matt-linder-ml/)|&nbsp;&nbsp;|[![GitHub](https://i.stack.imgur.com/tskMh.png)](https://github.com/mholmeslinder)|
 
 |Rana Ahmad&nbsp;&nbsp;&nbsp;|[![Linkedin](https://i.stack.imgur.com/gVE0j.png)](https://www.linkedin.com/in/ranataimurahmad/)|&nbsp;&nbsp;|[![GitHub](https://i.stack.imgur.com/tskMh.png)](https://github.com/taimur1871)|
 
@@ -36,6 +36,8 @@ This is where SpeakUpAI comes in. We want every aspiring podcaster, YouTuber, MO
 SpeakUpAI wants everyone to sound professional. We're *hear* to democratize audio.
 
 ---
+
+
 
 # Explanation of Data sets
 
@@ -79,7 +81,7 @@ As the authors [explain](https://daps.cs.princeton.edu/projects/HiFi-GAN/index.p
 
 > Real-world audio recordings are often degraded by factors such as noise, reverberation, and equalization distortion. This paper introduces HiFi-GAN, a deep learning method to transform recorded speech to sound as though it had been recorded in a studio. We use an end-to-end feed-forward WaveNet architecture, trained with multi-scale adversarial discriminators in both the time domain and the time-frequency domain. It relies on the deep feature matching losses of the discriminators to improve the perceptual quality of enhanced speech. The proposed model generalizes well to new speakers, new speech content, and new environments. It significantly outperforms state-of-the-art baseline methods in both objective and subjective experiments.
 
-Here, generator G includes a feed-forward WaveNet for speech enhancement, followed by a convolutional Postnet for cleanup. Discriminators evaluate the resulting waveform ($D_{W}$, at multiple resolutions) and mel-spectrogram ($D_{S}$).
+Here, generator G includes a feed-forward WaveNet for speech enhancement, followed by a convolutional Postnet for cleanup. Discriminators evaluate the resulting waveform (Dw, at multiple resolutions) and mel-spectrogram (Ds).
 
 On a practical level, we're using a PyTorch implementation of the HiFi-GAN model, [forked](https://github.com/w-transposed-x/hifi-gan-denoising) from the awesome folks at `w-transposed-x`. As with any deep learning projects, our initial efforts went towards getting the model up and running (aka lots of troubleshooting), test runs, and hyperparameter tweaks based on performance. 
 
@@ -133,10 +135,37 @@ As you can see, the model is improving consistently with each increase in traini
 
 ![{{site.url}}/project-update-media/Untitled%201.png]({{site.url}}/project-update-media/Untitled%201.png)
 
+You can read in MUCH greater detail about the system design of HiFi-GAN in the [original paper](https://arxiv.org/abs/2006.05694), but in a nutshell:
+
+The model is a GAN architecture using a Wavenet architecture (plus an optional simple convolution-based "Postnet") as the generator network with four(!) discriminator networks. Three of these are waveform-based - one utilizing with audio at original sample rate, and the other two downsampled by factors of 2. The last discriminator is Mel Spectrogram-based, and the adversarial loss is added to a relatively novel concept called "Deep Feature Loss", about which you can read in the original paper.
+
+We chose this architecture because:
+
+1. The results shown on the DAPS dataset were the most impressive we found in our survey of ML-based speech-enhancement.
+2. Using heterogenous sources - waveform and Mel Spectrogram - in the adversarial architecture of a GAN seems extremely promising. Most previous audio-based GANS are 100% spectrogram based, and as such, tend to have serious phase-related issues.
+
 ## HiFi-GAN System Design
 
 ![{{site.url}}/project-update-media/Untitled%202.png]({{site.url}}/project-update-media/Untitled%202.png)
+This is subject to change as we develop and iterate our process and deployment, but for the moment, system design looks like:
 
+- A user navigates to the SpeakUpAI website, where they land at the index page. There, they are prompted to upload an audio file for enhancement.
+- Once they choose a file and click `Upload`, that file is sent to SpeakUpAI's storage (an S3 bucket, for the moment), and then passed to our HiFi-GAN model for inference.
+- When inference is complete, it spits out an audio file (`.wav`), which is then moved to our storage, and the user is prompted to download the enhanced file.
+- Once the user downloads their enhanced file, the original and enhanced versions are erased from our storage.
+
+## Ethical Considerations
+
+Since we're designing a fully opt-in system that doesn't request any sensitive information, our ethical considerations fall into two main categories:
+
+1. Data Privacy
+2. Bias towards/against certain types of speaking voices/languages
+
+**Data Privacy** is obviously important, since users' audio: a.) is their own creative work and potentially subject to copyright or other intellectual property laws, and b.) could potentially contain sensitive information. 
+
+To that end, it's our mission to make sure that our network and storage systems are as secure as possible, and that users' content is completely erased from our system as soon as they've downloaded their enhanced audio.
+
+**Bias** is always a concern in ML systems, and it takes many forms. But, in this case - we're concerned with bias towards or against certain voices, accents, or languages. At the moment, our scope only gives us time to focus on English speakers, so extending the training to other languages will come later, but part of our current model evaluation will relate to how it is able to generalize to speakers with voices and accents different from those in the training and validation sets.
 ---
 
 # Future work and Timeplan
