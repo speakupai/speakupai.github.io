@@ -105,135 +105,27 @@ Currently, we have our super resolution U-Net properly implemented in TensorFlow
 
 We take a small clip of audio from our DAPS dataset, recorded on a common consumer device (iPad) in a common location (office), and we run it through our HiFi-GAN archicture.
 
-## Example 1 - "Familiar Voice"
-
-The following clips are from Female Voice 5, a voice upon whose studio recordings our model trained. But, these clips are from the holdout script, and they're from the Conference Room 2 dataset, upon which our model did not train
+The following results are from HiFi-GAN  after a very, very brief training (~1.5% of total steps from the original paper).
 
 ### Before HiFi-GAN
 
-[{{site.url}}/project-update-media/f5_script5.wav]({{site.url}}/project-update-media/f5_script5.wav)
-
 ### After
 
-Version 1 (~2% of original training)
+[{{site.url}}/project-update-media/Week_12_raw_snippet.wav]({{site.url}}/project-update-media/Week_12_raw_snippet.wav)
 
-[{{site.url}}/project-update-media/f5_script5_v1.wav]({{site.url}}/project-update-media/f5_script5_v1.wav)
+## Subjective Results
 
-Version 2 (~10% of original training)
+[{{site.url}}/project-update-media/Week_12_denoised_snippet.wav]({{site.url}}/project-update-media/Week_12_denoised_snippet.wav)
 
-[{{site.url}}/project-update-media/f5_script5_denoised.wav]({{site.url}}/project-update-media/f5_script5_denoised.wav)
+As you can hear, almost 100% of the background noise (often described as 'hum' or - in this case - 'hiss') has been removed. There is still some obvious artifacting in the spoken voice, but remember - this is a preliminary with a VERY tiny fraction of the full training.
 
-### Subjective Results
+## Objective Results
 
-As you can hear, almost 100% of the background noise (often described as 'hum' or - in this case - 'hiss') has been removed, even in Version 1. In its place, however, you can hear very noticeable 'artifacting' in the spoken voice.
+![{{site.url}}/project-update-media/Untitled.png]({{site.url}}/project-update-media/Untitled.png)
 
-In Version 2, however,  the voice starts to sound quite a bit more natural. And remember, this is with only about 10% of the original training schema, on a fraction of the original dataset, without having implemented all of the original data augmentation.
+ 
 
-## Example 2 - "New Voice"
-
-### Before HiFi-GAN
-
-[{{site.url}}/project-update-media/f10_script5.wav]({{site.url}}/project-update-media/f10_script5.wav)
-
-### After
-
-Version 1 (~2% of original training)
-
-[{{site.url}}/project-update-media/f10_script5v1.wav]({{site.url}}/project-update-media/f10_script5v1.wav)
-
-Version 2 (~10% of original training)
-
-[{{site.url}}/project-update-media/f10_script5v2.wav]({{site.url}}/project-update-media/f10_script5v2.wav)
-
-### Subjective Results
-
-The results here are extremely similar, but what's significant is the fact that this voice - Female Voice 10 - was not used at all in training the model. It's a completely new, unfamiliar voice, and you can hear that the model generalizes to it quite well. We find these results EXTREMELY promising.
-
-# Objective Results (metrics and analysis)
-
-We're evaluating the quality of our model's results using two main metrics:
-
-- [PESQ](https://en.wikipedia.org/wiki/Perceptual_Evaluation_of_Speech_Quality): "a worldwide applied industry standard for objective voice quality testing used by phone manufacturers, network equipment vendors and telecom operators"
-
-and
-
-- [STOI](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4452133/): "based on a correlation coefficient between the temporal envelopes of the time-aligned reference and processed speech signal in short-time overlapped segments"
-
-## Goals:
-
-Based on the results table of the HiFi-GAN paper (PESQ numbers first, STOI second):
-
-![{{site.url}}/project-update-media/Untitled.png](/Untitled.png)
-
-We've set our PESQ goal to be `1.5`, just above the level of Wave-U-Net, a deep learning solution.
-
-We've observed the STOI benchmark to be significantly more difficult to achieve, so we've set our goal to be `0.70`, or about 82% of the deep learning baseline set by Deep FL.
-
-We've set slightly reduced baselines here, due to the scope restraints of the current work. We'll only have the chance to train our model for a tiny fraction of the original HiFi-GAN training schema, which was:
-
-- 500,000 steps training the base Wavenet
-- 500,000 steps training the Wavenet + Postnet
-- 50,000 steps training all of the GAN elements (including the Wavenet, Postnet, and all four discriminators)
-
-## Version 1 and 2 results:
-
-Version 1 of the model had a training schema of: 
-
-- 12,000 steps on Wavenet (2.4% of original)
-- 12,000 steps on Wavenet + Postnet (2.4% of original)
-- 1,200 steps on all GAN elements (2.4% of original)
-
-Version 2 of the model had a training schema of: 
-
-- 50,000 steps on Wavenet (10% of original)
-- 50,000 steps on Wavenet + Postnet (10% of original)
-- 5000 steps on all GAN elements (10% of original)
-
-We'll be publishing Jupyter Notebooks with full analysis of the various Version results once we finish version 3, but for now, we'll break down the results by environment and speaker, since the impact of those on model performance is quite clear.
-
-## Evaluation Set:
-
-We created the same evaluation set as the one used in the HiFi-GAN paper. Our training and test sets were made from  the DAPS dataset, part of which is professional studio recordings of five scripts, read by twenty different speakers (ten male, ten female), though we held out one speaker of each gender for testing and one whole script for evaluation.
-
-The DAPS dataset also includes recordings of the same five scripts by the same twenty speakers, but this time recorded on different consumer devices (iPhones and iPads) in several different environments (Balcony, Bedroom, Conference rooms, Living room, and Office). 
-
-Our evaluation set is made up of the holdout script (never seen in testing) recorded by all speakers in all of these different environments. We ran inference on all 240 such clips (20 speakers x 12 various combinations of devices and rooms) and ran our PESQ and STOI metrics for evaluation.
-
-## Environment
-
-### **Version 1**
-
-![{{site.url}}/project-update-media/Untitled%201.png]({{site.url}}/project-update-media/Untitled%201.png)
-
-![{{site.url}}/project-update-media/Untitled%202.png]({{site.url}}/project-update-media/Untitled%202.png)
-
-### **Version 2**
-
-![{{site.url}}/project-update-media/Untitled%203.png]({{site.url}}/project-update-media/Untitled%203.png)
-
-![{{site.url}}/project-update-media/Untitled%204.png]({{site.url}}/project-update-media/Untitled%204.png)
-
-Clearly, the additional training steps between versions 1 and 2 made a ton of difference, and in version 2, we were able to exceed our PESQ and STOI goals on every environment except for the Balcony. The Balcony is by far the toughest environment in the dataset - being outdoors, it has significantly more background noise. Once Version 3 is training, if we're still not meeting our goals on the Balcony, we'll refactor our noise data augmentation to better match the amount and type of noise present in this outdoor environment.
-
-## Speaker
-
-### Version 1
-
-![{{site.url}}/project-update-media/Untitled%205.png]({{site.url}}/project-update-media/Untitled%205.png)
-
-![{{site.url}}/project-update-media/Untitled%206.png]({{site.url}}/project-update-media/Untitled%206.png)
-
-### Version 2
-
-![{{site.url}}/project-update-media/Untitled%207.png]({{site.url}}/project-update-media/Untitled%207.png)
-
-![{{site.url}}/project-update-media/Untitled%208.png]({{site.url}}/project-update-media/Untitled%208.png)
-
-Similar to the metrics grouped by environment, we can see ranges of performance in PESQ and STOI across the different speakers. Overall, the model tended to perform better on the male voices, though there was a wider range.
-
-The additional training for version 2 also had a similar impact, bringing the majority of PESQ scores above our goal threshold.
-
-Overall, though, version 2 is already hitting our overall PESQ and STOI goals with mean PESQ of	`2.042631` and STOI of `0.727752` across all evaluation examples.
+As you can see, the model is improving consistently with each increase in training. We'll be continuing to ramp up the training steps/epochs as we continue development - e.g. iron out some of the kinks with augmentation and distributed training - until our loss curves flatten, at which point we'll consider the results 'final' for this particular model iteration.
 
 ---
 
@@ -276,17 +168,20 @@ To that end, it's our mission to make sure that our network and storage systems 
 **Bias** is always a concern in ML systems, and it takes many forms. But, in this case - we're concerned with bias towards or against certain voices, accents, or languages. At the moment, our scope only gives us time to focus on English speakers, so extending the training to other languages will come later, but part of our current model evaluation will relate to how it is able to generalize to speakers with voices and accents different from those in the training and validation sets.
 ---
 
-# Future work
+# Future work and Timeplan
 
-- Use sonic analysis of noise and IR in underperforming environments to sculpt noise/IR augmentation for further training
+## Timeplan
+
+![{{site.url}}/project-update-media/Untitled%203.png]({{site.url}}/project-update-media/Untitled%203.png)
+
+## Future Work
+
 - Implementation of Bryan/HiFi-GAN Impulse Response augmentation
 - Longer training of Generator (wavenet and wavenet-postnet) models
 - Using Audio Super-Resolution model to upscale results from 16k to 44.1k (and beyond!)
 - Taking different audio/video formats as input - currently only `.wav`
 - Optimizing inference performance (currently works at near-realtime on a single GPU)
-- Implement Dask/Spark on deployment infrastructure to deal with large files
-- Creation of more varied datasets (in terms of languages/accents/voice types) by scraping high quality audio sources (NPR, etc.)
-- Implement sliding window technique
+- Implement Spark
 
 # Related Work (Papers, github)
 
