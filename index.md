@@ -103,8 +103,9 @@ Currently, we have our super resolution U-Net properly implemented in TensorFlow
 
 # Explanation of Outcomes (current results)
 
-We take a small clip of audio from our DAPS dataset, recorded on a common consumer device (iPad), and we run it through our HiFi-GAN archicture.
+## Example 1 - "Familiar voice, new environment"
 
+We take a small clip of audio from our DAPS dataset, recorded on a common consumer device (iPad), and we run it through our HiFi-GAN archicture.
 
 ### Before HiFi-GAN
 
@@ -126,7 +127,7 @@ As you can hear, almost 100% of the background noise (often described as 'hum' o
 
 In Version 2, however,  the voice starts to sound quite a bit more natural. And remember, this is with only about 10% of the original training schema, on a fraction of the original dataset, without having implemented all of the original data augmentation.
 
-## Example 2 - "New Voice"
+## Example 2 - "New Voice, new environment"
 
 ### Before HiFi-GAN
 
