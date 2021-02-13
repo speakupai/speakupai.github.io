@@ -238,7 +238,7 @@ Overall, though, version 2 is already hitting our overall PESQ and STOI goals wi
 
 ## Overall System Design
 
-![/project-update-media/Untitled%209.png](/project-update-media/Untitled%201.png)
+![/project-update-media/Untitled%209.png](/project-update-media/Untitled%209.png)
 
 You can read in MUCH greater detail about the system design of HiFi-GAN in the [original paper](https://arxiv.org/abs/2006.05694), but in a nutshell:
 
