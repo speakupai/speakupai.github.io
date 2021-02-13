@@ -105,9 +105,7 @@ Currently, we have our super resolution U-Net properly implemented in TensorFlow
 
 We take a small clip of audio from our DAPS dataset, recorded on a common consumer device (iPad) in a common location (office), and we run it through our HiFi-GAN archicture.
 
-## Example 1 - "Familiar Voice"
-
-The following clips are from Female Voice 5, a voice upon whose studio recordings our model trained. But, these clips are from the holdout script, and they're from the Conference Room 2 dataset, upon which our model did not train
+The following results are from HiFi-GAN  after a very, very brief training (~1.5% of total steps from the original paper).
 
 ### Before HiFi-GAN
 
@@ -169,21 +167,17 @@ We've set our PESQ goal to be `1.5`, just above the level of Wave-U-Net, a deep 
 
 We've observed the STOI benchmark to be significantly more difficult to achieve, so we've set our goal to be `0.70`, or about 82% of the deep learning baseline set by Deep FL.
 
-We've set slightly reduced baselines here, due to the scope restraints of the current work. We'll only have the chance to train our model for a tiny fraction of the original HiFi-GAN training schema, which was:
+## Subjective Results
 
-- 500,000 steps training the base Wavenet
-- 500,000 steps training the Wavenet + Postnet
-- 50,000 steps training all of the GAN elements (including the Wavenet, Postnet, and all four discriminators)
+[{{site.url}}/project-update-media/Week_12_denoised_snippet.wav]({{site.url}}/project-update-media/Week_12_denoised_snippet.wav)
 
-## Version 1 and 2 results:
+As you can hear, almost 100% of the background noise (often described as 'hum' or - in this case - 'hiss') has been removed. There is still some obvious artifacting in the spoken voice, but remember - this is a preliminary with a VERY tiny fraction of the full training.
 
-Version 1 of the model had a training schema of: 
+## Objective Results
 
-- 12,000 steps on Wavenet (2.4% of original)
-- 12,000 steps on Wavenet + Postnet (2.4% of original)
-- 1,200 steps on all GAN elements (2.4% of original)
+![{{site.url}}/project-update-media/Untitled.png]({{site.url}}/project-update-media/Untitled.png)
 
-Version 2 of the model had a training schema of: 
+ 
 
 - 50,000 steps on Wavenet (10% of original)
 - 50,000 steps on Wavenet + Postnet (10% of original)
@@ -276,17 +270,20 @@ To that end, it's our mission to make sure that our network and storage systems 
 **Bias** is always a concern in ML systems, and it takes many forms. But, in this case - we're concerned with bias towards or against certain voices, accents, or languages. At the moment, our scope only gives us time to focus on English speakers, so extending the training to other languages will come later, but part of our current model evaluation will relate to how it is able to generalize to speakers with voices and accents different from those in the training and validation sets.
 ---
 
-# Future work
+# Future work and Timeplan
 
-- Use sonic analysis of noise and IR in underperforming environments to sculpt noise/IR augmentation for further training
+## Timeplan
+
+![{{site.url}}/project-update-media/Untitled%203.png]({{site.url}}/project-update-media/Untitled%203.png)
+
+## Future Work
+
 - Implementation of Bryan/HiFi-GAN Impulse Response augmentation
 - Longer training of Generator (wavenet and wavenet-postnet) models
 - Using Audio Super-Resolution model to upscale results from 16k to 44.1k (and beyond!)
 - Taking different audio/video formats as input - currently only `.wav`
 - Optimizing inference performance (currently works at near-realtime on a single GPU)
-- Implement Dask/Spark on deployment infrastructure to deal with large files
-- Creation of more varied datasets (in terms of languages/accents/voice types) by scraping high quality audio sources (NPR, etc.)
-- Implement sliding window technique
+- Implement Spark
 
 # Related Work (Papers, github)
 
