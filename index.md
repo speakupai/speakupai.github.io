@@ -103,9 +103,8 @@ Currently, we have our super resolution U-Net properly implemented in TensorFlow
 
 # Explanation of Outcomes (current results)
 
-We take a small clip of audio from our DAPS dataset, recorded on a common consumer device (iPad) in a common location (office), and we run it through our HiFi-GAN archicture.
+We take a small clip of audio from our DAPS dataset, recorded on a common consumer device (iPad), and we run it through our HiFi-GAN archicture.
 
-The following results are from HiFi-GAN  after a very, very brief training (~1.5% of total steps from the original paper).
 
 ### Before HiFi-GAN
 
