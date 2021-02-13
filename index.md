@@ -111,17 +111,17 @@ The following clips are from Female Voice 5, a voice upon whose studio recording
 
 ### Before HiFi-GAN
 
-[{{site.url}}/project-update-media/f5_script5.wav]({{site.url}}/project-update-media/f5_script5.wav)
+[/project-update-media/f5_script5.wav](/project-update-media/f5_script5.wav)
 
 ### After
 
 Version 1 (~2% of original training)
 
-[{{site.url}}/project-update-media/f5_script5_v1.wav]({{site.url}}/project-update-media/f5_script5_v1.wav)
+[/project-update-media/f5_script5_v1.wav](/project-update-media/f5_script5_v1.wav)
 
 Version 2 (~10% of original training)
 
-[{{site.url}}/project-update-media/f5_script5_denoised.wav]({{site.url}}/project-update-media/f5_script5_denoised.wav)
+[/project-update-media/f5_script5_denoised.wav](/project-update-media/f5_script5_denoised.wav)
 
 ### Subjective Results
 
@@ -133,17 +133,17 @@ In Version 2, however,  the voice starts to sound quite a bit more natural. And 
 
 ### Before HiFi-GAN
 
-[{{site.url}}/project-update-media/f10_script5.wav]({{site.url}}/project-update-media/f10_script5.wav)
+[/project-update-media/f10_script5.wav](/project-update-media/f10_script5.wav)
 
 ### After
 
 Version 1 (~2% of original training)
 
-[{{site.url}}/project-update-media/f10_script5v1.wav]({{site.url}}/project-update-media/f10_script5v1.wav)
+[/project-update-media/f10_script5v1.wav](/project-update-media/f10_script5v1.wav)
 
 Version 2 (~10% of original training)
 
-[{{site.url}}/project-update-media/f10_script5v2.wav]({{site.url}}/project-update-media/f10_script5v2.wav)
+[/project-update-media/f10_script5v2.wav](/project-update-media/f10_script5v2.wav)
 
 ### Subjective Results
 
@@ -163,7 +163,7 @@ and
 
 Based on the results table of the HiFi-GAN paper (PESQ numbers first, STOI second):
 
-![{{site.url}}/project-update-media/Untitled.png](/Untitled.png)
+![/project-update-media/Untitled.png](/Untitled.png)
 
 We've set our PESQ goal to be `1.5`, just above the level of Wave-U-Net, a deep learning solution.
 
@@ -203,15 +203,15 @@ Our evaluation set is made up of the holdout script (never seen in testing) reco
 
 ### **Version 1**
 
-![{{site.url}}/project-update-media/Untitled%201.png]({{site.url}}/project-update-media/Untitled%201.png)
+![/project-update-media/Untitled%201.png](/project-update-media/Untitled%201.png)
 
-![{{site.url}}/project-update-media/Untitled%202.png]({{site.url}}/project-update-media/Untitled%202.png)
+![/project-update-media/Untitled%202.png](/project-update-media/Untitled%202.png)
 
 ### **Version 2**
 
-![{{site.url}}/project-update-media/Untitled%203.png]({{site.url}}/project-update-media/Untitled%203.png)
+![/project-update-media/Untitled%203.png](/project-update-media/Untitled%203.png)
 
-![{{site.url}}/project-update-media/Untitled%204.png]({{site.url}}/project-update-media/Untitled%204.png)
+![/project-update-media/Untitled%204.png](/project-update-media/Untitled%204.png)
 
 Clearly, the additional training steps between versions 1 and 2 made a ton of difference, and in version 2, we were able to exceed our PESQ and STOI goals on every environment except for the Balcony. The Balcony is by far the toughest environment in the dataset - being outdoors, it has significantly more background noise. Once Version 3 is training, if we're still not meeting our goals on the Balcony, we'll refactor our noise data augmentation to better match the amount and type of noise present in this outdoor environment.
 
@@ -219,15 +219,15 @@ Clearly, the additional training steps between versions 1 and 2 made a ton of di
 
 ### Version 1
 
-![{{site.url}}/project-update-media/Untitled%205.png]({{site.url}}/project-update-media/Untitled%205.png)
+![/project-update-media/Untitled%205.png](/project-update-media/Untitled%205.png)
 
-![{{site.url}}/project-update-media/Untitled%206.png]({{site.url}}/project-update-media/Untitled%206.png)
+![/project-update-media/Untitled%206.png](/project-update-media/Untitled%206.png)
 
 ### Version 2
 
-![{{site.url}}/project-update-media/Untitled%207.png]({{site.url}}/project-update-media/Untitled%207.png)
+![/project-update-media/Untitled%207.png](/project-update-media/Untitled%207.png)
 
-![{{site.url}}/project-update-media/Untitled%208.png]({{site.url}}/project-update-media/Untitled%208.png)
+![/project-update-media/Untitled%208.png](/project-update-media/Untitled%208.png)
 
 Similar to the metrics grouped by environment, we can see ranges of performance in PESQ and STOI across the different speakers. Overall, the model tended to perform better on the male voices, though there was a wider range.
 
@@ -241,7 +241,7 @@ Overall, though, version 2 is already hitting our overall PESQ and STOI goals wi
 
 ## Overall System Design
 
-![{{site.url}}/project-update-media/Untitled%201.png]({{site.url}}/project-update-media/Untitled%201.png)
+![/project-update-media/Untitled%201.png](/project-update-media/Untitled%201.png)
 
 You can read in MUCH greater detail about the system design of HiFi-GAN in the [original paper](https://arxiv.org/abs/2006.05694), but in a nutshell:
 
@@ -254,7 +254,7 @@ We chose this architecture because:
 
 ## HiFi-GAN System Design
 
-![{{site.url}}/project-update-media/Untitled%202.png]({{site.url}}/project-update-media/Untitled%202.png)
+![/project-update-media/Untitled%202.png](/project-update-media/Untitled%202.png)
 This is subject to change as we develop and iterate our process and deployment, but for the moment, system design looks like:
 
 - A user navigates to the SpeakUpAI website, where they land at the index page. There, they are prompted to upload an audio file for enhancement.
