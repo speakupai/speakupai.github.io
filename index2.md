@@ -1,25 +1,4 @@
----
-layout: page
-title: Hello
-subtitle: We Are Team Speak Up
-sitemap:
-  priority: 0.9
----
-
-<img src="{{ '/assets/img/pudhina.jpg' | prepend: site.baseurl }}" id="about-img">
-
-<div id="describe-text">
-	<p>Our Mission is to Democratize Audio Production with Machine Learning</p>
-	<p>check out our project <strong> <a href="https://github.com/speakupai"> repository</a> </strong></p>
-</div>
-
-# The Team
-
-|Matt Linder&nbsp;&nbsp;&nbsp;|[![Linkedin](https://i.stack.imgur.com/gVE0j.png)](https://www.linkedin.com/in/matt-linder-ml/)|&nbsp;&nbsp;|[![GitHub](https://i.stack.imgur.com/tskMh.png)](https://github.com/mholmeslinder)|
-
-|Rana Ahmad&nbsp;&nbsp;&nbsp;|[![Linkedin](https://i.stack.imgur.com/gVE0j.png)](https://www.linkedin.com/in/ranataimurahmad/)|&nbsp;&nbsp;|[![GitHub](https://i.stack.imgur.com/tskMh.png)](https://github.com/taimur1871)|
-
-|Wilson Ye&nbsp;&nbsp;&nbsp;|[![Linkedin](https://i.stack.imgur.com/gVE0j.png)](https://www.linkedin.com/in/wilsonye1/)|&nbsp;&nbsp;|[![GitHub](https://i.stack.imgur.com/tskMh.png)](https://github.com/LqYe)|
+# SpeakUpAI FINAL Project Update
 
 # Background and Significance of Project
 
@@ -37,7 +16,46 @@ SpeakUpAI wants everyone to sound professional. We're *hear* to democratize audi
 
 ---
 
+# Related Work (Papers, github)
 
+This is by no means comprehensive, but the following are some of the papers, repos, and products we researched while creating SpeakUpAI. Items marked with "***" are directly utilized in our research.
+
+## Automatic Mixing
+
+- [Deep learning and intelligent audio mixing](https://www.eecs.qmul.ac.uk/~josh/documents/2017/WIMP2017_Martinez-RamirezReiss.pdf)
+- [Intelligent Sound Engineering](https://intelligentsoundengineering.wordpress.com/category/machine-learning/)
+
+## Vocal DeNoising specific
+
+### Papers
+
+- [Audio Super-Resolution using Neural Nets](https://openreview.net/pdf?id=S1gNakBFx) ***
+- [Practical Deep Learning Audio Denoising](https://sthalles.github.io/practical-deep-learning-audio-denoising/)
+- [Audio Super-Resolution using neural networks](https://paperswithcode.com/paper/audio-super-resolution-using-neural-networks)
+- [Speech Denoising by Accumulating Per-Frequency Modeling Fluctuations](https://paperswithcode.com/paper/audio-denoising-with-deep-network-priors)
+- [using Deep learning to reconstruct high-resolution audio](https://blog.insightdatascience.com/using-deep-learning-to-reconstruct-high-resolution-audio-29deee8b7ccd)
+    - [Preprocessing tools](https://github.com/jhetherly/EnglishSpeechUpsampler/tree/master/preprocessing)
+- [Speech-enhancement (denoising)](https://github.com/vbelz/Speech-enhancement)
+- [Conventional DSP Noise Reduction](https://timsainburg.com/noise-reduction-python.html)
+
+### Products
+
+- [Accusonus](https://accusonus.com/products/audio-repair)
+- [Izotope Vocal Assistant](https://www.izotope.com/en/learn/how-to-mix-vocals-with-nectar-3-vocal-assistant.html)
+
+## Audio and De-Noising GANs
+
+- [WAVEGAN](https://github.com/chrisdonahue/wavegan) ***
+- [HiFi-GAN](https://daps.cs.princeton.edu/projects/HiFi-GAN/index.php?env-pairs=DAPS&speaker=f10&src-env=all) ***
+- [Magenta GANSynth](https://magenta.tensorflow.org/gansynth)
+- [DN-Gan for Denoising](https://www.sciencedirect.com/science/article/abs/pii/S1746809419302137) and [code](https://github.com/manumathewthomas/ImageDenoisingGAN)
+
+## Impulse Response Augmentation
+
+- [IMPULSE RESPONSE DATA AUGMENTATION AND DEEP NEURAL NETWORKS
+FOR BLIND ROOM ACOUSTIC PARAMETER ESTIMATION](https://arxiv.org/pdf/1909.03642.pdf) ***
+
+---
 
 # Explanation of Data sets
 
@@ -81,7 +99,7 @@ As the authors [explain](https://daps.cs.princeton.edu/projects/HiFi-GAN/index.p
 
 > Real-world audio recordings are often degraded by factors such as noise, reverberation, and equalization distortion. This paper introduces HiFi-GAN, a deep learning method to transform recorded speech to sound as though it had been recorded in a studio. We use an end-to-end feed-forward WaveNet architecture, trained with multi-scale adversarial discriminators in both the time domain and the time-frequency domain. It relies on the deep feature matching losses of the discriminators to improve the perceptual quality of enhanced speech. The proposed model generalizes well to new speakers, new speech content, and new environments. It significantly outperforms state-of-the-art baseline methods in both objective and subjective experiments.
 
-Here, generator G includes a feed-forward WaveNet for speech enhancement, followed by a convolutional Postnet for cleanup. Discriminators evaluate the resulting waveform (Dw, at multiple resolutions) and mel-spectrogram (Ds).
+Here, generator G includes a feed-forward WaveNet for speech enhancement, followed by a convolutional Postnet for cleanup. Discriminators evaluate the resulting waveform ($D_{W}$, at multiple resolutions) and mel-spectrogram ($D_{S}$).
 
 On a practical level, we're using a PyTorch implementation of the HiFi-GAN model, [forked](https://github.com/w-transposed-x/hifi-gan-denoising) from the awesome folks at `w-transposed-x`. As with any deep learning projects, our initial efforts went towards getting the model up and running (aka lots of troubleshooting), test runs, and hyperparameter tweaks based on performance. 
 
@@ -111,17 +129,17 @@ The following clips are from Female Voice 5, a voice upon whose studio recording
 
 ### Before HiFi-GAN
 
-[/project-update-media/f5_script5.wav](/project-update-media/f5_script5.wav)
+[SpeakUpAI%20FINAL%20Project%20Update%2092a9be85cd154ecd8a0921ef6a390fa1/f5_script5.wav](SpeakUpAI%20FINAL%20Project%20Update%2092a9be85cd154ecd8a0921ef6a390fa1/f5_script5.wav)
 
 ### After
 
 Version 1 (~2% of original training)
 
-[/project-update-media/f5_script5_v1.wav](/project-update-media/f5_script5_v1.wav)
+[SpeakUpAI%20FINAL%20Project%20Update%2092a9be85cd154ecd8a0921ef6a390fa1/f5_script5_v1.wav](SpeakUpAI%20FINAL%20Project%20Update%2092a9be85cd154ecd8a0921ef6a390fa1/f5_script5_v1.wav)
 
 Version 2 (~10% of original training)
 
-[/project-update-media/f5_script5_denoised.wav](/project-update-media/f5_script5_denoised.wav)
+[SpeakUpAI%20FINAL%20Project%20Update%2092a9be85cd154ecd8a0921ef6a390fa1/f5_script5_denoised.wav](SpeakUpAI%20FINAL%20Project%20Update%2092a9be85cd154ecd8a0921ef6a390fa1/f5_script5_denoised.wav)
 
 ### Subjective Results
 
@@ -133,17 +151,17 @@ In Version 2, however,  the voice starts to sound quite a bit more natural. And 
 
 ### Before HiFi-GAN
 
-[/project-update-media/f10_script5.wav](/project-update-media/f10_script5.wav)
+[SpeakUpAI%20FINAL%20Project%20Update%2092a9be85cd154ecd8a0921ef6a390fa1/f10_script5.wav](SpeakUpAI%20FINAL%20Project%20Update%2092a9be85cd154ecd8a0921ef6a390fa1/f10_script5.wav)
 
 ### After
 
 Version 1 (~2% of original training)
 
-[/project-update-media/f10_script5v1.wav](/project-update-media/f10_script5v1.wav)
+[SpeakUpAI%20FINAL%20Project%20Update%2092a9be85cd154ecd8a0921ef6a390fa1/f10_script5v1.wav](SpeakUpAI%20FINAL%20Project%20Update%2092a9be85cd154ecd8a0921ef6a390fa1/f10_script5v1.wav)
 
 Version 2 (~10% of original training)
 
-[/project-update-media/f10_script5v2.wav](/project-update-media/f10_script5v2.wav)
+[SpeakUpAI%20FINAL%20Project%20Update%2092a9be85cd154ecd8a0921ef6a390fa1/f10_script5v2.wav](SpeakUpAI%20FINAL%20Project%20Update%2092a9be85cd154ecd8a0921ef6a390fa1/f10_script5v2.wav)
 
 ### Subjective Results
 
@@ -163,7 +181,7 @@ and
 
 Based on the results table of the HiFi-GAN paper (PESQ numbers first, STOI second):
 
-![/project-update-media/Untitled.png](/Untitled.png)
+![SpeakUpAI%20FINAL%20Project%20Update%2092a9be85cd154ecd8a0921ef6a390fa1/Untitled.png](SpeakUpAI%20FINAL%20Project%20Update%2092a9be85cd154ecd8a0921ef6a390fa1/Untitled.png)
 
 We've set our PESQ goal to be `1.5`, just above the level of Wave-U-Net, a deep learning solution.
 
@@ -203,15 +221,15 @@ Our evaluation set is made up of the holdout script (never seen in testing) reco
 
 ### **Version 1**
 
-![/project-update-media/Untitled%201.png](/project-update-media/Untitled%201.png)
+![SpeakUpAI%20FINAL%20Project%20Update%2092a9be85cd154ecd8a0921ef6a390fa1/Untitled%201.png](SpeakUpAI%20FINAL%20Project%20Update%2092a9be85cd154ecd8a0921ef6a390fa1/Untitled%201.png)
 
-![/project-update-media/Untitled%202.png](/project-update-media/Untitled%202.png)
+![SpeakUpAI%20FINAL%20Project%20Update%2092a9be85cd154ecd8a0921ef6a390fa1/Untitled%202.png](SpeakUpAI%20FINAL%20Project%20Update%2092a9be85cd154ecd8a0921ef6a390fa1/Untitled%202.png)
 
 ### **Version 2**
 
-![/project-update-media/Untitled%203.png](/project-update-media/Untitled%203.png)
+![SpeakUpAI%20FINAL%20Project%20Update%2092a9be85cd154ecd8a0921ef6a390fa1/Untitled%203.png](SpeakUpAI%20FINAL%20Project%20Update%2092a9be85cd154ecd8a0921ef6a390fa1/Untitled%203.png)
 
-![/project-update-media/Untitled%204.png](/project-update-media/Untitled%204.png)
+![SpeakUpAI%20FINAL%20Project%20Update%2092a9be85cd154ecd8a0921ef6a390fa1/Untitled%204.png](SpeakUpAI%20FINAL%20Project%20Update%2092a9be85cd154ecd8a0921ef6a390fa1/Untitled%204.png)
 
 Clearly, the additional training steps between versions 1 and 2 made a ton of difference, and in version 2, we were able to exceed our PESQ and STOI goals on every environment except for the Balcony. The Balcony is by far the toughest environment in the dataset - being outdoors, it has significantly more background noise. Once Version 3 is training, if we're still not meeting our goals on the Balcony, we'll refactor our noise data augmentation to better match the amount and type of noise present in this outdoor environment.
 
@@ -219,15 +237,15 @@ Clearly, the additional training steps between versions 1 and 2 made a ton of di
 
 ### Version 1
 
-![/project-update-media/Untitled%205.png](/project-update-media/Untitled%205.png)
+![SpeakUpAI%20FINAL%20Project%20Update%2092a9be85cd154ecd8a0921ef6a390fa1/Untitled%205.png](SpeakUpAI%20FINAL%20Project%20Update%2092a9be85cd154ecd8a0921ef6a390fa1/Untitled%205.png)
 
-![/project-update-media/Untitled%206.png](/project-update-media/Untitled%206.png)
+![SpeakUpAI%20FINAL%20Project%20Update%2092a9be85cd154ecd8a0921ef6a390fa1/Untitled%206.png](SpeakUpAI%20FINAL%20Project%20Update%2092a9be85cd154ecd8a0921ef6a390fa1/Untitled%206.png)
 
 ### Version 2
 
-![/project-update-media/Untitled%207.png](/project-update-media/Untitled%207.png)
+![SpeakUpAI%20FINAL%20Project%20Update%2092a9be85cd154ecd8a0921ef6a390fa1/Untitled%207.png](SpeakUpAI%20FINAL%20Project%20Update%2092a9be85cd154ecd8a0921ef6a390fa1/Untitled%207.png)
 
-![/project-update-media/Untitled%208.png](/project-update-media/Untitled%208.png)
+![SpeakUpAI%20FINAL%20Project%20Update%2092a9be85cd154ecd8a0921ef6a390fa1/Untitled%208.png](SpeakUpAI%20FINAL%20Project%20Update%2092a9be85cd154ecd8a0921ef6a390fa1/Untitled%208.png)
 
 Similar to the metrics grouped by environment, we can see ranges of performance in PESQ and STOI across the different speakers. Overall, the model tended to perform better on the male voices, though there was a wider range.
 
@@ -239,9 +257,9 @@ Overall, though, version 2 is already hitting our overall PESQ and STOI goals wi
 
 # System Design and Ethical Considerations
 
-## Overall System Design
+## HiFi-GAN System Design
 
-![/project-update-media/Untitled%201.png](/project-update-media/Untitled%201.png)
+![SpeakUpAI%20FINAL%20Project%20Update%2092a9be85cd154ecd8a0921ef6a390fa1/Untitled%209.png](SpeakUpAI%20FINAL%20Project%20Update%2092a9be85cd154ecd8a0921ef6a390fa1/Untitled%209.png)
 
 You can read in MUCH greater detail about the system design of HiFi-GAN in the [original paper](https://arxiv.org/abs/2006.05694), but in a nutshell:
 
@@ -252,12 +270,16 @@ We chose this architecture because:
 1. The results shown on the DAPS dataset were the most impressive we found in our survey of ML-based speech-enhancement.
 2. Using heterogenous sources - waveform and Mel Spectrogram - in the adversarial architecture of a GAN seems extremely promising. Most previous audio-based GANS are 100% spectrogram based, and as such, tend to have serious phase-related issues.
 
-## HiFi-GAN System Design
+## Overall System Design
 
-![/project-update-media/Untitled%202.png](/project-update-media/Untitled%202.png)
+![SpeakUpAI%20FINAL%20Project%20Update%2092a9be85cd154ecd8a0921ef6a390fa1/Untitled%2010.png](SpeakUpAI%20FINAL%20Project%20Update%2092a9be85cd154ecd8a0921ef6a390fa1/Untitled%2010.png)
+
 This is subject to change as we develop and iterate our process and deployment, but for the moment, system design looks like:
 
 - A user navigates to the SpeakUpAI website, where they land at the index page. There, they are prompted to upload an audio file for enhancement.
+
+![SpeakUpAI%20FINAL%20Project%20Update%2092a9be85cd154ecd8a0921ef6a390fa1/Untitled%2011.png](SpeakUpAI%20FINAL%20Project%20Update%2092a9be85cd154ecd8a0921ef6a390fa1/Untitled%2011.png)
+
 - Once they choose a file and click `Upload`, that file is sent to SpeakUpAI's storage (an S3 bucket, for the moment), and then passed to our HiFi-GAN model for inference.
 - When inference is complete, it spits out an audio file (`.wav`), which is then moved to our storage, and the user is prompted to download the enhanced file.
 - Once the user downloads their enhanced file, the original and enhanced versions are erased from our storage.
@@ -274,6 +296,7 @@ Since we're designing a fully opt-in system that doesn't request any sensitive i
 To that end, it's our mission to make sure that our network and storage systems are as secure as possible, and that users' content is completely erased from our system as soon as they've downloaded their enhanced audio.
 
 **Bias** is always a concern in ML systems, and it takes many forms. But, in this case - we're concerned with bias towards or against certain voices, accents, or languages. At the moment, our scope only gives us time to focus on English speakers, so extending the training to other languages will come later, but part of our current model evaluation will relate to how it is able to generalize to speakers with voices and accents different from those in the training and validation sets.
+
 ---
 
 # Future work
@@ -287,42 +310,3 @@ To that end, it's our mission to make sure that our network and storage systems 
 - Implement Dask/Spark on deployment infrastructure to deal with large files
 - Creation of more varied datasets (in terms of languages/accents/voice types) by scraping high quality audio sources (NPR, etc.)
 - Implement sliding window technique
-
-# Related Work (Papers, github)
-
-This is by no means comprehensive, but the following are some of the papers, repos, and products we researched while creating SpeakUpAI. Items marked with "***" are directly utilized in our research.
-
-## Automatic Mixing
-
-- [Deep learning and intelligent audio mixing](https://www.eecs.qmul.ac.uk/~josh/documents/2017/WIMP2017_Martinez-RamirezReiss.pdf)
-- [Intelligent Sound Engineering](https://intelligentsoundengineering.wordpress.com/category/machine-learning/)
-
-## Vocal DeNoising specific
-
-### Papers
-
-- [Audio Super-Resolution using Neural Nets](https://openreview.net/pdf?id=S1gNakBFx) ***
-- [Practical Deep Learning Audio Denoising](https://sthalles.github.io/practical-deep-learning-audio-denoising/)
-- [Audio Super-Resolution using neural networks](https://paperswithcode.com/paper/audio-super-resolution-using-neural-networks)
-- [Speech Denoising by Accumulating Per-Frequency Modeling Fluctuations](https://paperswithcode.com/paper/audio-denoising-with-deep-network-priors)
-- [using Deep learning to reconstruct high-resolution audio](https://blog.insightdatascience.com/using-deep-learning-to-reconstruct-high-resolution-audio-29deee8b7ccd)
-    - [Preprocessing tools](https://github.com/jhetherly/EnglishSpeechUpsampler/tree/master/preprocessing)
-- [Speech-enhancement (denoising)](https://github.com/vbelz/Speech-enhancement)
-- [Conventional DSP Noise Reduction](https://timsainburg.com/noise-reduction-python.html)
-
-### Products
-
-- [Accusonus](https://accusonus.com/products/audio-repair)
-- [Izotope Vocal Assistant](https://www.izotope.com/en/learn/how-to-mix-vocals-with-nectar-3-vocal-assistant.html)
-
-## Audio and De-Noising GANs
-
-- [WAVEGAN](https://github.com/chrisdonahue/wavegan) ***
-- [HiFi-GAN](https://daps.cs.princeton.edu/projects/HiFi-GAN/index.php?env-pairs=DAPS&speaker=f10&src-env=all) ***
-- [Magenta GANSynth](https://magenta.tensorflow.org/gansynth)
-- [DN-Gan for Denoising](https://www.sciencedirect.com/science/article/abs/pii/S1746809419302137) and [code](https://github.com/manumathewthomas/ImageDenoisingGAN)
-
-## Impulse Response Augmentation
-
-- [IMPULSE RESPONSE DATA AUGMENTATION AND DEEP NEURAL NETWORKS
-FOR BLIND ROOM ACOUSTIC PARAMETER ESTIMATION](https://arxiv.org/pdf/1909.03642.pdf) ***
