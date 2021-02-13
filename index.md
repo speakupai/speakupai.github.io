@@ -238,7 +238,7 @@ Overall, though, version 2 is already hitting our overall PESQ and STOI goals wi
 
 ## Overall System Design
 
-![/project-update-media/Untitled%201.png](/project-update-media/Untitled%201.png)
+![/project-update-media/Untitled%209.png](/project-update-media/Untitled%201.png)
 
 You can read in MUCH greater detail about the system design of HiFi-GAN in the [original paper](https://arxiv.org/abs/2006.05694), but in a nutshell:
 
@@ -251,7 +251,7 @@ We chose this architecture because:
 
 ## HiFi-GAN System Design
 
-![/project-update-media/Untitled%202.png](/project-update-media/Untitled%202.png)
+![/project-update-media/Untitled%202.png](/project-update-media/Untitled%210.png)
 This is subject to change as we develop and iterate our process and deployment, but for the moment, system design looks like:
 
 - A user navigates to the SpeakUpAI website, where they land at the index page. There, they are prompted to upload an audio file for enhancement.
