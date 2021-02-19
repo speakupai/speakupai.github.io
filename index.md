@@ -10,7 +10,7 @@ sitemap:
 
 <div id="describe-text">
 	<p>Our Mission is to Democratize Audio Production with Machine Learning</p>
-	<p>check out our project <strong> <a href="http://speakupai.ml"> Live Demo </a> </strong> and <strong> <a href="https://github.com/speakupai"> repository</a> </strong></p>
+	<p>check out our project <strong> <a href="http://speakupai.ml"> Live Demo </a> </strong> and <strong> <a href="https://github.com/speakupai"> Repository</a> </strong></p>
 </div>
 
 # The Team
