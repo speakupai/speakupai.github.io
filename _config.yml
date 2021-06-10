@@ -3,8 +3,8 @@ title: Speak Up
 description: >
   Democratizing Audio Production with Machine Learning
 
-baseurl: "/speakupai.github.io/" # the subpath of your site, e.g. /blog/
-url: "speakupai.github.io" # the base hostname & protocol for your site
+baseurl: "" # the subpath of your site, e.g. /blog/
+url: "" # the base hostname & protocol for your site
 
 author:
   fullname: speakupai
